@@ -7,14 +7,17 @@ import userRouter from "./routers/userRouter";
 import videoRouter from "./routers/videoRouter"
 import globalRouter from "./routers/globalRouter";
 import routes from "./routes";
+import {localsMiddleWare} from "./middlewares";
+
 const app = express();
 
 // MiddleWares
-app.set('view engine', 'pug');
+app.use(helmet());
+app.set('view engine', 'pug'); //controller.render(view) : .pug file connect
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(morgan("dev"));
-app.use(helmet());
+app.use(localsMiddleWare);
 
 //Routing middleware
 //사용자가 정의한 Router 모듈을 미들웨어로 세팅 (./routers/)
